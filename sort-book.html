@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+    <!--
+    Name: Changming Tan
+    Date: 5/8/2019
+    URL: http://ctan.greenriverdev.com/207/sort-book/sort-book.html
+
+    This website sorts a list of books lexicographically.
+    If the title of the book begins with "The" then sort by the second word instead.
+    -->
+    <meta charset="UTF-8">
+    <title>Book List</title>
+</head>
+	<body>
+		<h1>Book List</h1>
+        <p>This website sorts a list of books lexicographically.<br>
+        If the title of the book begins with "The" then sort by the second word instead.<br>
+        Please enter book names in the text box and click the button.<br><br><br>
+        </p>
+		
+		<ul id='list'>
+		</ul>
+		
+		<input id="input" type='text'>
+		
+		<button id='addBtn'>Add A Book</button>
+		
+		<script>
+			var addBtn = document.getElementById('addBtn');
+			var input = document.getElementById('input');
+			var list = document.getElementById('list');
+			var ulChildren = list.childNodes;
+			var book = [];
+			
+			addBtn.onclick = addBookList;
+			
+			function addBookList()
+			{
+				var item = input.value;
+				
+				clearList();
+				
+				if(item !== '')
+				{
+					book.push(item);
+					book.sort();
+				}
+				
+				for(var i in book)
+				{
+					if(book.length != 0)
+					{
+						var textNode = document.createTextNode(book[i]);
+						var li = document.createElement('li');
+						li.className = book[i];
+						li.appendChild(textNode);
+						list.appendChild(li);
+					}
+					
+				}
+				
+				input.value = '';
+			}
+			
+			function clearList()
+			{
+				if(ulChildren.length != 0)
+				{
+					for(var p = ulChildren.length -1; p >= 0; p--)
+					{
+						list.removeChild(ulChildren[p]);
+					}
+				}
+			}
+		</script>
+	</body>
+</html>
